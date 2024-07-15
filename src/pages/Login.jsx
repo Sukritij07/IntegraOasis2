@@ -14,7 +14,7 @@ function Login() {
   const [password, setPassword] = useState();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     axios
       .post("http://localhost:3000/api/user/signup", {
@@ -34,13 +34,14 @@ function Login() {
   const [passwordl, setPasswordl] = useState();
   const navigatel = useNavigate();
 
-  const handleSubmitl = (e) => {
+  const handleSubmitl = async(e) => {
     e.preventDefault();
     axios
       .post("http://localhost:3000/api/user/login", { usernamel, passwordl })
       .then((result) => {
         console.log(result);
-        if (result.data === "Success") {
+        if (result.data.token) {
+            localStorage.setItem("token", result.data.token);
           navigatel("/in");
         } else {
           navigatel("/");
@@ -64,7 +65,7 @@ function Login() {
           className="flex flex-col items-center justify-center p-6 gap-3"
         >
           <form onSubmit={handleSubmitl}>
-            <div className="flex flex-col items-center gap-3">
+            <div className="flex flex-col items-center gap-3 mt-3">
               <Label htmlFor="username" className="text-center">
                 Username
               </Label>
@@ -74,7 +75,7 @@ function Login() {
                 onChange={(e) => setUsernamel(e.target.value)}
               />
             </div>
-            <div className="flex flex-col items-center gap-3">
+            <div className="flex flex-col items-center gap-3 mt-3">
               <Label htmlFor="password" className="text-center">
                 Password
               </Label>
@@ -84,12 +85,12 @@ function Login() {
                 onChange={(e) => setPasswordl(e.target.value)}
               />
             </div>
-            <div className="flex flex-col items-center gap-3">
+            <div className="flex flex-col items-center gap-3 mt-3">
               <Link className="links" to="/passchange">
                 Forgot password?
               </Link>
             </div>
-            <div className="flex flex-col items-center gap-3">
+            <div className="flex flex-col items-center gap-3 mt-3">
               <Button type="submit">Login</Button>
             </div>
           </form>
