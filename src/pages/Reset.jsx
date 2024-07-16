@@ -7,28 +7,29 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function Otp() {
+function Resetotp() {
   const [otp, setOtp] = useState();
+  const [password, setPassword] = useState();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/api/user/verify-otp", { otp })
+      .post("http://localhost:3000/api/user/reset-password", { otp, password })
       .then((result) => {
         console.log(result);
         if (result.data === "Success") {
           navigate("/login");
           alert("Signin with your saved credentials");
         } else {
-          navigate("/otp");
+          navigate("/resetotp");
           alert("Incorrect Otp");
         }
       })
       .catch((err) => console.log(err));
   };
   return (
-    <div className="Login">
+    <div className="Resetotp">
       <header className="flex items justify-center mb-2 ">
         <img src="images/headingn.jpg" />
       </header>
@@ -43,6 +44,15 @@ function Otp() {
             onChange={(e) => setOtp(e.target.value)}
           />
           <p>Please enter the one-time password sent to your email.</p>
+          <Label htmlFor="password" className="text-center text-[25px]">
+            New Password
+          </Label>
+          <Input
+            id="password"
+            className="form-control w-1/5"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <p>Please enter the new password.</p>
           <Button type="submit">Submit</Button>
         </div>
       </form>
@@ -50,4 +60,4 @@ function Otp() {
   );
 }
 
-export default Otp;
+export default Resetotp;

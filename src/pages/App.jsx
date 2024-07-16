@@ -7,47 +7,31 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Button } from "@/components/ui/button";
-import axios from "axios";
 import Header from "../sharedcomp/Header";
 import Nav from "../sharedcomp/Nav";
+import Footer from "../sharedcomp/Footer";
 
 function App() {
-  async function Appdata() {
-    try {
-      const data = {
-        name: "Sukriti",
-        username: "suk07",
-        email: "a@a.com",
-        password: "abc",
-      };
-      const response = await axios.post(
-        "http://localhost:3000/api/user/signup",
-        data
-      );
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  }
   return (
     <div className="App">
       <Header />
-      <div className="text-[50px] font-['Rage'] text-[#052747] text-center">
+      <div id="featured" className="bg-cyan-100 text-[50px] font-['Rage'] text-[#052747] text-center">
         Featured
       </div>
-      <Carousel className="w-full max-w-xl mx-auto mb-5">
+      <Carousel className="w-full max-w-xl mx-auto mb-5 mt-4">
         <CarouselContent>
           {Array.from({ length: 3 }).map((_, index) => (
             <CarouselItem key={index}>
               <div className="p-1">
                 <Card>
                   <CardContent className="flex items-center justify-center p-6">
-                    <img
-                      src={`images/image${index + 1}.jpg`}
-                      className="w-full"
-                      alt={`image${index + 1}`}
-                    />
+                    <Link to={`/site${index + 1}`}>
+                      <img
+                        src={`images/image${index + 1}.jpg`}
+                        className="w-full h-full"
+                        alt={`image${index + 1}`}
+                      />
+                    </Link>
                   </CardContent>
                 </Card>
               </div>
@@ -57,7 +41,7 @@ function App() {
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
-      <div className="text-[50px] font-['Rage'] text-[#052747] text-center mb-4">
+      <div className="bg-cyan-100 text-[50px] font-['Rage'] text-[#052747] text-center mb-4">
         Categories
       </div>
       <div className="grid grid-cols-3 gap-2">
@@ -134,7 +118,7 @@ function App() {
       </div>
       <Nav />
 
-      <footer className="bg-[#052747] text-[aliceblue] flex h-[200px] items-center justify-between mt-10"></footer>
+      <Footer />
     </div>
   );
 }

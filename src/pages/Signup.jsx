@@ -7,47 +7,66 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function Login() {
+function Signup() {
+  const [name, setName] = useState();
   const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const navigatel = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/api/user/login", { username, password })
+      .post("http://localhost:3000/api/user/signup", {
+        name,
+        username,
+        email,
+        password,
+      })
       .then((result) => {
         console.log(result);
-        if (result.data.token) {
-          localStorage.setItem("token", result.data.token);
-          localStorage.setItem("userId", result.data.userId);
-
-          navigatel("/in");
-        } else {
-          navigatel("/signup");
-          alert("You are not registered to this service, kindly signup first.");
-        }
+        navigate("/otp");
       })
       .catch((err) => console.log(err));
   };
 
   return (
-    <div className="Login">
+    <div className="Signup">
       <header className="flex items justify-center mb-2 ">
         <img src="images/headingn.jpg" />
       </header>
       <Tabs defaultValue="log" className="w-full max-w-xl mx-auto ">
         <TabsList className="flex items-center justify-center p-6">
-          <TabsTrigger value="signin">Sign In</TabsTrigger>
+          <TabsTrigger value="signup">Sign Up</TabsTrigger>
         </TabsList>
         <TabsContent
-          value="signin"
+          value="signup"
           className="flex flex-col items-center justify-center p-6 gap-3"
         >
           <form onSubmit={handleSubmit}>
+            <div className="flex flex-col items-center gap-3">
+              <Label htmlFor="name" className="text-center">
+                Enter name:
+              </Label>
+              <Input
+                id="name"
+                className="form-control"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col items-center gap-3 mt-3">
+              <Label htmlFor="email" className="text-center">
+                Enter email:
+              </Label>
+              <Input
+                id="email"
+                className="form-control"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
             <div className="flex flex-col items-center gap-3 mt-3">
               <Label htmlFor="username" className="text-center">
-                Username
+                Create username:
               </Label>
               <Input
                 id="username"
@@ -57,7 +76,7 @@ function Login() {
             </div>
             <div className="flex flex-col items-center gap-3 mt-3">
               <Label htmlFor="password" className="text-center">
-                Password
+                Create password:
               </Label>
               <Input
                 id="password"
@@ -66,15 +85,7 @@ function Login() {
               />
             </div>
             <div className="flex flex-col items-center gap-3 mt-3">
-              <Link className="links" to="/passchange">
-                Forgot password?
-              </Link>
-              <Link className="links" to="/signup">
-                Don't have an account? Sign up
-              </Link>
-            </div>
-            <div className="flex flex-col items-center gap-3 mt-3">
-              <Button type="submit">Login</Button>
+              <Button type="submit">Signup</Button>
             </div>
           </form>
         </TabsContent>
@@ -83,4 +94,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signup;

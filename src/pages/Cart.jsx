@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
 import Header from "../sharedcomp/Header";
-import Nav from "../sharedcomp/Nav";
 
 function Cart() {
   return (

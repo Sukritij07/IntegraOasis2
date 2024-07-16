@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   Sheet,
@@ -8,8 +8,27 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
 
 function Header() {
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const userId = localStorage.getItem("userId");
+      try {
+        const result = await axios.get(
+          `http://localhost:3000/api/user/profile/${userId}`
+        );
+        setUser(result.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchProfile();
+  }, []);
+
   return (
     <header className="bg-[#052747] text-[aliceblue] flex h-[80px] items-center justify-between">
       <nav className="flex items-center justify-between">
@@ -83,11 +102,17 @@ function Header() {
             </SheetHeader>
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
-                Name: {"Sukriti"}
+                Name: {user.name}
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                Username: {"suk07"}
+                Username: {user.username}
               </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                Email: {user.email}
+              </div>
+              <Button className="bg-[#052747] text-white">
+                <Link to="/">Logout</Link>
+              </Button>
             </div>
           </SheetContent>
         </Sheet>
