@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -16,7 +18,23 @@ import Nav from "../sharedcomp/Nav";
 import Footer from "../sharedcomp/Footer";
 
 function Resell() {
-  const { toast } = useToast();
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  const handleAddToCart = async (productId, price, quantity) => {
+    const userId = localStorage.getItem("userId");
+    try {
+      await axios.post("http://localhost:3000/api/cart/add", {
+        productId,
+        price,
+        quantity,
+        userId,
+      });
+      alert("Item added to cart");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="Resell">
@@ -44,16 +62,7 @@ function Resell() {
             </h1>
             <Button
               className="bg-[#052747] text-white ml-[110px] my-3"
-              onClick={() => {
-                toast({
-                  title: "Item added to cart",
-                  action: (
-                    <ToastAction altText="Goto schedule to undo">
-                      Undo
-                    </ToastAction>
-                  ),
-                });
-              }}
+              onClick={() => handleAddToCart("product1", 49.0, 1)}
             >
               Add to Cart
             </Button>
