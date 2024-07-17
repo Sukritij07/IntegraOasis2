@@ -45,30 +45,37 @@ function About() {
       <div className="flex items justify-center">
         <Accordion type="single" collapsible className="w-[600px]">
           <AccordionItem value="item-1">
-            <AccordionTrigger>Is it accessible?</AccordionTrigger>
+            <AccordionTrigger>
+              Can I sell used items on resell?
+            </AccordionTrigger>
             <AccordionContent>
-              Yes. It adheres to the WAI-ARIA design pattern.
+              Yes. You can buy and sell used and second hand items on resell.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
-            <AccordionTrigger>Is it styled?</AccordionTrigger>
+            <AccordionTrigger>
+              Does it promote small scale businesses?
+            </AccordionTrigger>
             <AccordionContent>
-              Yes. It comes with default styles that matches the other
-              components&apos; aesthetic.
+              Yes. We aim on promoting small scale and handicraft businesses by
+              giving them personal platforms to show case their products and
+              skills.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-3">
-            <AccordionTrigger>Is it animated?</AccordionTrigger>
+            <AccordionTrigger>How to use the learn feature?</AccordionTrigger>
             <AccordionContent>
-              Yes. It's animated by default, but you can disable it if you
-              prefer.
+              Go to Learn option in the bottom navigation bar. Visit any
+              businesses of your choice, browse through their skill learning
+              programs and workshops. Choose the one that suits you best, add to
+              cart, make the payment and Voila!!,you can now learn from the best itself.
             </AccordionContent>
           </AccordionItem>
         </Accordion>
       </div>
       <Nav />
-      <Footer/>
-      </div>
+      <Footer />
+    </div>
   );
 }
 

@@ -16,7 +16,7 @@ function Footer() {
         <Link to="/buy">Buy</Link>
         <Link to="/resell">Resell</Link>
         <Link to="#">Learn</Link>
-        <Link to="#featured">Featured</Link>
+        <Link to="/in">Categories</Link>
       </div>
     </footer>
   );
