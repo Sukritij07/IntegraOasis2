@@ -1,15 +1,37 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ToastAction } from "@/components/ui/toast";
-import { useToast } from "@/components/ui/use-toast";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import Header from "../sharedcomp/Header";
 import Nav from "../sharedcomp/Nav";
 import Footer from "../sharedcomp/Footer";
+import axios from "axios";
 
 function SilkyT() {
-  const { toast } = useToast();
+  const handleAddToCart = async (
+    productId,
+    name,
+    description,
+    image,
+    price,
+    quantity
+  ) => {
+    const userId = localStorage.getItem("userId"); // Assuming you store the user ID in localStorage
+    try {
+      const response = await axios.post("http://localhost:3000/api/cart/add", {
+        userId,
+        productId,
+        name,
+        description,
+        image,
+        price,
+        quantity,
+      });
+      console.log("Item added to cart:", response.data);
+      alert("Item added to cart");
+    } catch (err) {
+      console.error("Error adding item to cart:", err);
+    }
+  };
 
   return (
     <div className="Resell">
@@ -41,16 +63,16 @@ function SilkyT() {
             </h1>
             <Button
               className="bg-[#052747] text-white ml-[160px] my-3"
-              onClick={() => {
-                toast({
-                  title: "Item added to cart",
-                  action: (
-                    <ToastAction altText="Goto schedule to undo">
-                      Undo
-                    </ToastAction>
-                  ),
-                });
-              }}
+              onClick={() =>
+                handleAddToCart(
+                  "suit1",
+                  "Double Ikkat (Blue)",
+                  "3 piece set",
+                  "images/dikkat1.jpg",
+                  2000.0,
+                  1
+                )
+              }
             >
               Add to Cart
             </Button>
@@ -78,16 +100,16 @@ function SilkyT() {
             </h1>
             <Button
               className="bg-[#052747] text-white ml-[160px] my-3"
-              onClick={() => {
-                toast({
-                  title: "Item added to cart",
-                  action: (
-                    <ToastAction altText="Goto schedule to undo">
-                      Undo
-                    </ToastAction>
-                  ),
-                });
-              }}
+              onClick={() =>
+                handleAddToCart(
+                  "suit4",
+                  "Ikkat on Cotton (Blue)",
+                  "3 piece set",
+                  "images/ikkat1.jpg",
+                  1800.0,
+                  1
+                )
+              }
             >
               Add to Cart
             </Button>
@@ -112,16 +134,16 @@ function SilkyT() {
             </h1>
             <Button
               className="bg-[#052747] text-white ml-[160px] my-3"
-              onClick={() => {
-                toast({
-                  title: "Item added to cart",
-                  action: (
-                    <ToastAction altText="Goto schedule to undo">
-                      Undo
-                    </ToastAction>
-                  ),
-                });
-              }}
+              onClick={() =>
+                handleAddToCart(
+                  "suit7",
+                  "South Cotton (Blue)",
+                  "3 piece set",
+                  "images/south1.jpg",
+                  1600.0,
+                  1
+                )
+              }
             >
               Add to Cart
             </Button>
@@ -149,16 +171,16 @@ function SilkyT() {
             </h1>
             <Button
               className="bg-[#052747] text-white ml-[160px] my-3"
-              onClick={() => {
-                toast({
-                  title: "Item added to cart",
-                  action: (
-                    <ToastAction altText="Goto schedule to undo">
-                      Undo
-                    </ToastAction>
-                  ),
-                });
-              }}
+              onClick={() =>
+                handleAddToCart(
+                  "suit2",
+                  "Double Ikkat (Green)",
+                  "3 piece set",
+                  "images/dikkat2.jpg",
+                  2000.0,
+                  1
+                )
+              }
             >
               Add to Cart
             </Button>
@@ -186,16 +208,16 @@ function SilkyT() {
             </h1>
             <Button
               className="bg-[#052747] text-white ml-[160px] my-3"
-              onClick={() => {
-                toast({
-                  title: "Item added to cart",
-                  action: (
-                    <ToastAction altText="Goto schedule to undo">
-                      Undo
-                    </ToastAction>
-                  ),
-                });
-              }}
+              onClick={() =>
+                handleAddToCart(
+                  "suit5",
+                  "Ikkat on Cotton (Green)",
+                  "3 piece set",
+                  "images/ikkat2.jpg",
+                  1800.0,
+                  1
+                )
+              }
             >
               Add to Cart
             </Button>
@@ -220,16 +242,16 @@ function SilkyT() {
             </h1>
             <Button
               className="bg-[#052747] text-white ml-[160px] my-3"
-              onClick={() => {
-                toast({
-                  title: "Item added to cart",
-                  action: (
-                    <ToastAction altText="Goto schedule to undo">
-                      Undo
-                    </ToastAction>
-                  ),
-                });
-              }}
+              onClick={() =>
+                handleAddToCart(
+                  "suit8",
+                  "South Cotton (Red)",
+                  "3 piece set",
+                  "images/south2.jpg",
+                  1600.0,
+                  1
+                )
+              }
             >
               Add to Cart
             </Button>
@@ -257,16 +279,16 @@ function SilkyT() {
             </h1>
             <Button
               className="bg-[#052747] text-white ml-[160px] my-3"
-              onClick={() => {
-                toast({
-                  title: "Item added to cart",
-                  action: (
-                    <ToastAction altText="Goto schedule to undo">
-                      Undo
-                    </ToastAction>
-                  ),
-                });
-              }}
+              onClick={() =>
+                handleAddToCart(
+                  "suit3",
+                  "Double Ikkat (Maroon)",
+                  "3 piece set",
+                  "images/dikkat3.jpg",
+                  2000.0,
+                  1
+                )
+              }
             >
               Add to Cart
             </Button>
@@ -294,16 +316,16 @@ function SilkyT() {
             </h1>
             <Button
               className="bg-[#052747] text-white ml-[160px] my-3"
-              onClick={() => {
-                toast({
-                  title: "Item added to cart",
-                  action: (
-                    <ToastAction altText="Goto schedule to undo">
-                      Undo
-                    </ToastAction>
-                  ),
-                });
-              }}
+              onClick={() =>
+                handleAddToCart(
+                  "suit6",
+                  "Ikkat on Cotton (Purple)",
+                  "3 piece set",
+                  "images/ikkat3.jpg",
+                  1800.0,
+                  1
+                )
+              }
             >
               Add to Cart
             </Button>
@@ -328,16 +350,16 @@ function SilkyT() {
             </h1>
             <Button
               className="bg-[#052747] text-white ml-[160px] my-3"
-              onClick={() => {
-                toast({
-                  title: "Item added to cart",
-                  action: (
-                    <ToastAction altText="Goto schedule to undo">
-                      Undo
-                    </ToastAction>
-                  ),
-                });
-              }}
+              onClick={() =>
+                handleAddToCart(
+                  "suit9",
+                  "South Cotton (Grey)",
+                  "3 piece set",
+                  "images/south3.jpg",
+                  1600.0,
+                  1
+                )
+              }
             >
               Add to Cart
             </Button>

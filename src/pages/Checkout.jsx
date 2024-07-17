@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 const Checkout = () => {
@@ -70,9 +71,33 @@ const Checkout = () => {
     pay.open();
   };
 
+  useEffect(() => {
+    const storedValue = localStorage.getItem("myValue");
+    setFormData({ totalAmount: storedValue || "" });
+  }, []);
+
   return (
     <div className="flex container d-flex items-center justify-center h-screen">
       <div className="card p-4 shadow-lg" style={{ width: "60%" }}>
+        <Button className="mt-3 mr-[550px] h-[40px] w-[40px] bg-[#052747]">
+          <Link to="/cart">
+            <svg
+              className="flex w-9 h-9 mb-2 text-white dark:text-white group-hover:text-gray-500 items justify-center"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 22 22"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 12h14M5 12l4-4m-4 4 4 4"
+              />
+            </svg>
+          </Link>
+        </Button>
         <h2 className="mb-4 text-center text-[30px] font-['Georgia'] text-[#052747]">
           Add Address
         </h2>
@@ -200,6 +225,7 @@ const Checkout = () => {
                 value={formData.totalAmount}
                 onChange={handleChange}
                 required
+                readOnly
               />
             </div>
           </div>

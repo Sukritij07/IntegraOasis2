@@ -2,39 +2,51 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-// import { Skeleton } from "@/components/ui/skeleton";
 import Header from "../sharedcomp/Header";
 import { useNavigate } from "react-router-dom";
+import { Card, CardContent } from "@/components/ui/card";
 
 function Cart() {
   const [cart, setCart] = useState({ items: [] });
-  const [totalPrice, setTotalPrice] = useState(0);
   const navigate = useNavigate();
+  const userId = localStorage.getItem("userId"); // Assuming you store the user ID in localStorage
+
   useEffect(() => {
     const fetchCart = async () => {
-      const userId = localStorage.getItem('userId');
       try {
-        const result = await axios.get(`http://localhost:3000/api/cart/${userId}`);
-        setCart(result.data);
+        const response = await axios.get(
+          `http://localhost:3000/api/cart/${userId}`
+        );
+        setCart(response.data);
       } catch (err) {
-        console.error("Error fetching cart:", err.message);
+        console.error("Error fetching cart:", err);
       }
     };
 
     fetchCart();
-  }, []);
+  }, [userId]);
 
-  const totalprice = cart.items.reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalprice = cart.items.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
 
   const handleRemoveFromCart = async (productId) => {
-    const userId = localStorage.getItem('userId');
     try {
-      const result = await axios.post('http://localhost:3000/api/cart/remove', { productId, userId });
+      const result = await axios.post("http://localhost:3000/api/cart/remove", {
+        productId,
+        userId,
+      });
       setCart(result.data);
     } catch (err) {
       console.error("Error removing item from cart:", err.message);
       alert("Error removing item from cart");
     }
+  };
+  const handleSave = () => {
+    const valueToSave = totalprice;
+    localStorage.setItem('myValue', valueToSave);
+    navigate("/checkout");
   };
 
   return (
@@ -65,41 +77,43 @@ function Cart() {
 
       <ul>
         {cart.items.map((item) => (
-          <li key={item.productId}>
-            <span>Product ID: {item.productId}</span>
-            <span>Price: ₹{item.price}</span>
-            <span>Quantity: {item.quantity}</span>
-            <Button
-              className="bg-[#052747] text-white ml-4"
-              onClick={() => handleRemoveFromCart(item.productId)}
-            >
-              Remove
-            </Button>
+          <li key={item.productId} className="flex items justify-center">
+            <Card className="w-[600px] h-[200px] mx-4 my-2">
+              <CardContent>
+                <div className="flex items justify-center">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="flex items-center justify-center h-[180px] w-[250px] my-3 mx-4 rounded"
+                  />
+                  <Card className="w-[250px] h-[180px] mx-4 my-3">
+                    <CardContent>
+                      <h2>{item.name}</h2>
+                      <p>{item.description}</p>
+                      <p>Price: ₹{item.price.toFixed(2)}</p>
+                      <p>Quantity: {item.quantity}</p>
+                      <Button
+                        className="bg-[#052747] text-white ml-[130px] mt-[30px]"
+                        onClick={() => handleRemoveFromCart(item.productId)}
+                      >
+                        Remove
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CardContent>
+            </Card>
           </li>
         ))}
       </ul>
-
-      {/* <div className="flex flex-col ml-20 mb-10 space-y-3">
-        <Skeleton className="h-[125px] w-[500px] rounded-xl" />
-        <div className="space-y-2">
-          <Skeleton className="h-4 w-[250px]" />
-          <Skeleton className="h-4 w-[200px]" />
-        </div>
-        <Skeleton className="h-[125px] w-[500px] rounded-xl" />
-        <div className="space-y-2">
-          <Skeleton className="h-4 w-[250px]" />
-          <Skeleton className="h-4 w-[200px]" />
-        </div>
-      </div> */}
-      <div className="fixed w-full h-[60px] bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600 bottom-1">
+      <div className="fixed w-full h-[60px] bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600 bottom-0">
         <div className="flex items justify-center">
-          <h1 className="flex items justify-center text-[#052747] text-[30px]">
+          <h1 className="fixed text-[#052747] text-[30px] left-[10px]">
             <b>Total : ₹{totalprice.toFixed(2)}</b>
           </h1>
-          <Button className="flex w-[240px] h-[50px] bg-[#052747] gap-x-3 mt-1 ml-[950px] mr-5">
-            <Link className="links" to="/checkout">
+          <Button onClick={handleSave} className="fixed w-[240px] h-[50px] bg-[#052747] gap-x-3 mt-1 mr-1 right-[10px]">
+            
               Checkout
-            </Link>
           </Button>
         </div>
       </div>

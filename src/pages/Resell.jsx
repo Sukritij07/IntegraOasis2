@@ -1,38 +1,39 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ToastAction } from "@/components/ui/toast";
-import { useToast } from "@/components/ui/use-toast";
-import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import Header from "../sharedcomp/Header";
 import Nav from "../sharedcomp/Nav";
 import Footer from "../sharedcomp/Footer";
 
 function Resell() {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
 
-  const handleAddToCart = async (productId, price, quantity) => {
-    const userId = localStorage.getItem("userId");
+  const handleAddToCart = async (
+    productId,
+    name,
+    description,
+    image,
+    price,
+    quantity
+  ) => {
+    const userId = localStorage.getItem("userId"); // Assuming you store the user ID in localStorage
     try {
-      await axios.post("http://localhost:3000/api/cart/add", {
+      const response = await axios.post("http://localhost:3000/api/cart/add", {
+        userId,
         productId,
+        name,
+        description,
+        image,
         price,
         quantity,
-        userId,
       });
+      console.log("Item added to cart:", response.data);
       alert("Item added to cart");
     } catch (err) {
-      console.log(err);
+      console.error("Error adding item to cart:", err);
     }
   };
 
@@ -62,7 +63,16 @@ function Resell() {
             </h1>
             <Button
               className="bg-[#052747] text-white ml-[110px] my-3"
-              onClick={() => handleAddToCart("product1", 49.0, 1)}
+              onClick={() =>
+                handleAddToCart(
+                  "product1",
+                  "1 Time used Jwellery Box",
+                  "Dimensions : 20cmX15cm",
+                  "images/resell1.webp",
+                  49.0,
+                  1
+                )
+              }
             >
               Add to Cart
             </Button>
@@ -83,16 +93,16 @@ function Resell() {
             </h1>
             <Button
               className="bg-[#052747] text-white ml-[110px] my-3"
-              onClick={() => {
-                toast({
-                  title: "Item added to cart",
-                  action: (
-                    <ToastAction altText="Goto schedule to undo">
-                      Undo
-                    </ToastAction>
-                  ),
-                });
-              }}
+              onClick={() =>
+                handleAddToCart(
+                  "product2",
+                  "Panasonic Lumix DMC-TZ60",
+                  "18.1 MP Grade",
+                  "images/resell2.webp",
+                  18206.07,
+                  1
+                )
+              }
             >
               Add to Cart
             </Button>
@@ -112,16 +122,16 @@ function Resell() {
             </h1>
             <Button
               className="bg-[#052747] text-white ml-[110px] my-3"
-              onClick={() => {
-                toast({
-                  title: "Item added to cart",
-                  action: (
-                    <ToastAction altText="Goto schedule to undo">
-                      Undo
-                    </ToastAction>
-                  ),
-                });
-              }}
+              onClick={() =>
+                handleAddToCart(
+                  "product3",
+                  "Relic Women Watch",
+                  "Stainless Steel Silver Gold",
+                  "images/resell3.webp",
+                  2930.38,
+                  1
+                )
+              }
             >
               Add to Cart
             </Button>
@@ -141,16 +151,16 @@ function Resell() {
             </h1>
             <Button
               className="bg-[#052747] text-white ml-[110px] my-3"
-              onClick={() => {
-                toast({
-                  title: "Item added to cart",
-                  action: (
-                    <ToastAction altText="Goto schedule to undo">
-                      Undo
-                    </ToastAction>
-                  ),
-                });
-              }}
+              onClick={() =>
+                handleAddToCart(
+                  "product4",
+                  "Vtg Shevron Nylon Jacket",
+                  "Size : L",
+                  "images/resell4.webp",
+                  7286.17,
+                  1
+                )
+              }
             >
               Add to Cart
             </Button>
