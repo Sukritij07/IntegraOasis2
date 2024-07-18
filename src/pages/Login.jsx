@@ -61,6 +61,7 @@ function Login() {
               </Label>
               <Input
                 id="password"
+                type="password"
                 className="form-control"
                 onChange={(e) => setPassword(e.target.value)}
               />

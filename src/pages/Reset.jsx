@@ -19,7 +19,7 @@ function Resetotp() {
       .then((result) => {
         console.log(result);
         if (result.data === "Success") {
-          navigate("/login");
+          navigate("/");
           alert("Signin with your saved credentials");
         } else {
           navigate("/resetotp");
@@ -49,6 +49,7 @@ function Resetotp() {
           </Label>
           <Input
             id="password"
+            type="password"
             className="form-control w-1/5"
             onChange={(e) => setPassword(e.target.value)}
           />
