@@ -21,7 +21,6 @@ function Login() {
         if (result.data.token) {
           localStorage.setItem("token", result.data.token);
           localStorage.setItem("userId", result.data.userId);
-
           navigatel("/in");
         } else {
           navigatel("/signup");
@@ -30,7 +29,6 @@ function Login() {
       })
       .catch((err) => console.log(err));
   };
-
   return (
     <div className="Login">
       <header className="flex items justify-center mb-2 ">

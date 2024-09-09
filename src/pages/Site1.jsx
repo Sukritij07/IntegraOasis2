@@ -32,7 +32,6 @@ function SilkyT() {
       console.error("Error adding item to cart:", err);
     }
   };
-
   return (
     <div className="Resell">
       <Header />
@@ -381,5 +380,4 @@ function SilkyT() {
     </div>
   );
 }
-
 export default SilkyT;

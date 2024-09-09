@@ -50,6 +50,7 @@ const Checkout = () => {
       handler: function (response) {
         const paymentId = response.razorpay_payment_id;
         console.log("paymant id", paymentId, shipping_address);
+        window.location.href = "/in";
         setFormData({
           fname: "",
           lname: "",

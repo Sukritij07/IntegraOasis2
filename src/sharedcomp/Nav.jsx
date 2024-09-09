@@ -37,7 +37,7 @@ function Nav() {
           variant="ghost"
           className="inline-flex flex-col items justify-center px-5 hover:bg-gray group"
         >
-          <Link to="#">
+          <Link to="/learn">
             <div className="flex flex-col items-center justify-center">
               <svg
                 className="flex w-5 h-5 mb-2 text-white dark:text-white group-hover:text-gray-500 "

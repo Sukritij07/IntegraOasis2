@@ -117,7 +117,6 @@ function App() {
         </Card>
       </div>
       <Nav />
-
       <Footer />
     </div>
   );

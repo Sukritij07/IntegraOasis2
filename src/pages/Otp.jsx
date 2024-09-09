@@ -18,7 +18,7 @@ function Otp() {
       .then((result) => {
         console.log(result);
         if (result.data === "Success") {
-          navigate("/login");
+          navigate("/");
           alert("Signin with your saved credentials");
         } else {
           navigate("/otp");

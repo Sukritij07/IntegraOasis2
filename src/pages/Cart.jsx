@@ -45,10 +45,9 @@ function Cart() {
   };
   const handleSave = () => {
     const valueToSave = totalprice;
-    localStorage.setItem('myValue', valueToSave);
+    localStorage.setItem("myValue", valueToSave);
     navigate("/checkout");
   };
-
   return (
     <div className="Cart">
       <Header />
@@ -74,7 +73,6 @@ function Cart() {
         </Button>
         <h1 className="mr-[590px]">Shopping Bag</h1>
       </div>
-
       <ul>
         {cart.items.map((item) => (
           <li key={item.productId} className="flex items justify-center">
@@ -111,9 +109,11 @@ function Cart() {
           <h1 className="fixed text-[#052747] text-[30px] left-[10px]">
             <b>Total : ₹{totalprice.toFixed(2)}</b>
           </h1>
-          <Button onClick={handleSave} className="fixed w-[240px] h-[50px] bg-[#052747] gap-x-3 mt-1 mr-1 right-[10px]">
-            
-              Checkout
+          <Button
+            onClick={handleSave}
+            className="fixed w-[240px] h-[50px] bg-[#052747] gap-x-3 mt-1 mr-1 right-[10px]"
+          >
+            Checkout
           </Button>
         </div>
       </div>
